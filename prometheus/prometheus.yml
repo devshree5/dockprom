@@ -27,12 +27,22 @@ scrape_configs:
     scrape_interval: 10s
     static_configs:
       - targets: ['localhost:9090']
+      
+  - job_name: jenkins
+    metrics_path: /prometheus
+    static_configs:
+      - targets: ['20.119.100.19:9080']
+  - job_name: app_mediclaim
+    metrics_path: /claimdb/actuator/prometheus
+    static_configs:
+      - targets: [20.119.100.19:9096']
 
   - job_name: 'pushgateway'
     scrape_interval: 10s
     honor_labels: true
     static_configs:
       - targets: ['pushgateway:9091']
+      
 
 
 alerting:
